@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnColumnDef>
+    <defName>SmartShutdownArea</defName>
+    <label>smart work self-charge area</label>
+    <workerClass>SmartWorkMode.PawnColumnWorker_SmartShutdownArea</workerClass>
+    <groupable>true</groupable>
+  </PawnColumnDef>
+
+</Defs>
