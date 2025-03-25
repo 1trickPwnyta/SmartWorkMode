@@ -13,13 +13,40 @@ namespace SmartWorkMode
             {
                 if (!SmartWorkModeSettings.RequireDormantGroup || mechanitor.controlGroups.Any(g => g.WorkMode == RimWorld.MechWorkModeDefOf.SelfShutdown))
                 {
-                    if (RCellFinder.TryFindNearbyMechSelfShutdownSpot(pawn.Position, pawn, pawn.Map, out IntVec3 c, true))
+                    MechanitorControlGroup group = pawn.GetMechControlGroup();
+                    if (group != null)
                     {
-                        Job job = JobMaker.MakeJob(JobDefOf.SelfShutdown, c);
-                        job.forceSleep = true;
-                        job.expiryInterval = 300;
-                        job.checkOverrideOnExpire = true;
-                        return job;
+                        Area area = group.GetSmartShutdownArea(pawn.Map);
+                        IntVec3 c = pawn.Position;
+                        if (area != null && area.TrueCount > 0 && !area[pawn.Position])
+                        {
+                            Region region = null;
+                            RegionTraverser.BreadthFirstTraverse(pawn.GetRegion(RegionType.Set_Passable), (Region from, Region r) => r.Allows(TraverseParms.For(pawn), false), r =>
+                            {
+                                if (r.IsDoorway)
+                                {
+                                    return false;
+                                }
+                                if (!r.IsForbiddenEntirely(pawn) && r.OverlapWith(area) != AreaOverlap.None)
+                                {
+                                    region = r;
+                                    return true;
+                                }
+                                return false;
+                            }, 9999);
+                            if (region != null)
+                            {
+                                region.TryFindRandomCellInRegionUnforbidden(pawn, cell => area[cell], out c);
+                            }
+                        }
+                        if (RCellFinder.TryFindNearbyMechSelfShutdownSpot(c, pawn, pawn.Map, out IntVec3 target, true))
+                        {
+                            Job job = JobMaker.MakeJob(JobDefOf.SelfShutdown, target);
+                            job.forceSleep = true;
+                            job.expiryInterval = 300;
+                            job.checkOverrideOnExpire = true;
+                            return job;
+                        }
                     }
                 }
             }

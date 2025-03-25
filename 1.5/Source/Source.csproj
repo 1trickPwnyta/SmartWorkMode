@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Debug.cs" />
-    <Compile Include="JobGiver_SeekSmartShutdownArea.cs" />
     <Compile Include="JobGiver_SmartShutdown.cs" />
     <Compile Include="MechWorkModeDefOf.cs" />
     <Compile Include="Patch_MechanitorControlGroup.cs" />

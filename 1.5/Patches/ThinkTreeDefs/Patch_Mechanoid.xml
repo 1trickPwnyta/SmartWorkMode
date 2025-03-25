@@ -19,18 +19,8 @@
 								<targetAcquireRadius>65</targetAcquireRadius>
 								<targetKeepRadius>72</targetKeepRadius>
 							</li>
-							<li Class="ThinkNode_Tagger">
-								<tagToGive>MiscWork</tagToGive>
-								<subNodes>
-									<li Class="JobGiver_WanderColony">
-										<maxDanger>Deadly</maxDanger>
-										<reportStringOverride TKey="ReportStringPatrolling">Patrolling.</reportStringOverride>
-									</li>
-								</subNodes>
-							</li>
 						</subNodes>
 					</li>
-					<li Class="SmartWorkMode.JobGiver_SeekSmartShutdownArea" />
 					<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
 				</subNodes>
 			</li>
