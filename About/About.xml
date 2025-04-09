@@ -7,7 +7,10 @@
 		<li>1.5</li>
 	</supportedVersions>
 	<description>
-
+Mechs in Work mode waste a lot of energy wandering around idly when there is no work for them to do. This mod adds a new work mode for mechs called Smart Work. Smart Work functions the same as Work but with the following differences:
+- There is no patrol activity for combat mechs.
+- When idle, mechs go into self-shutdown (similar to Self Shutdown mode) to recharge slowly, but will wake back up when more work becomes available.
+- You can set an area (per control group) for idle self-shutdown in the Mechs tab. Mechs will move to that area before shutting down to charge.
 
 === Credits ===
 Mod icon: twitter.com/mouse_draws
