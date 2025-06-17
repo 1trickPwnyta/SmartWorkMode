@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<SmartWorkMode_RequireDormantGroup>Require existing dormant self-charge control group for smart work mode self-charging</SmartWorkMode_RequireDormantGroup>
+	<SmartWorkMode_FirstDefaultWorkMode>Default work mode for first control group</SmartWorkMode_FirstDefaultWorkMode>
+	<SmartWorkMode_SecondDefaultWorkMode>Default work mode for second control group</SmartWorkMode_SecondDefaultWorkMode>
+	<SmartWorkMode_AdditionalDefaultWorkMode>Default work mode for additional control groups</SmartWorkMode_AdditionalDefaultWorkMode>
+	<SmartWorkMode_ClickToChangeSmartShutdownArea>Click to change area for smart work mode self-charging.</SmartWorkMode_ClickToChangeSmartShutdownArea>
+	<SmartWorkMode_SetToSmartWorkModeToChange>Switch to smart work mode to change this.</SmartWorkMode_SetToSmartWorkModeToChange>
+</LanguageData>

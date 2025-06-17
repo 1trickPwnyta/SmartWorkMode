@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MechWorkModeDef>
+    <defName>SmartWork</defName>
+    <label>smart work</label>
+    <description>Work autonomously according to mechanoid type. Automatically go to rechargers and recharge when needed. When idle, go into a dormant self-charging state that very slowly regains energy without a recharger. For game balance, self-charging only works when the mechanitor has another control group set to dormant self-charge.</description>
+    <iconPath>UI/Icons/WorkMode/BiotechPatch_SmartWork</iconPath>
+  </MechWorkModeDef>
+
+</Defs>

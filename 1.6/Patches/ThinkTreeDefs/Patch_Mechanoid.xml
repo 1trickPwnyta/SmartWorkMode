@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThinkTreeDef[defName="Mechanoid"]/thinkRoot/subNodes/li[@Class="ThinkNode_ConditionalPlayerControlledMech"]/subNodes/li[@Class="ThinkNode_ConditionalNotFormingCaravan"]/subNodes</xpath>
+		<value>
+			<li Class="ThinkNode_ConditionalWorkMode">
+				<workMode>SmartWork</workMode>
+				<subNodes>
+					<li Class="JobGiver_SeekAllowedArea" />
+					<li Class="JobGiver_GetEnergy_Charger" />
+					<li Class="JobGiver_Work">
+						<emergency>true</emergency>
+					</li>
+					<li Class="JobGiver_Work" />
+					<li Class="ThinkNode_ConditionalWorkMech">
+						<invert>true</invert>
+						<subNodes>
+							<li Class="JobGiver_AIFightEnemies">
+								<targetAcquireRadius>65</targetAcquireRadius>
+								<targetKeepRadius>72</targetKeepRadius>
+							</li>
+						</subNodes>
+					</li>
+					<li Class="SmartWorkMode.JobGiver_SmartShutdown" />
+				</subNodes>
+			</li>
+		</value>
+	</Operation>
+</Patch>
