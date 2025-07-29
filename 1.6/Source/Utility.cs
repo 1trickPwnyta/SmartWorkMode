@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using System.Collections.Generic;
 using Verse;
 
@@ -6,7 +7,8 @@ namespace SmartWorkMode
 {
     public static class Utility
     {
-        private static Dictionary<MechanitorControlGroup, Dictionary<Map, Area>> shutdownAreas = new Dictionary<MechanitorControlGroup, Dictionary<Map, Area>>();
+        public static readonly Dictionary<MechanitorControlGroup, Dictionary<Map, Area>> shutdownAreas = new Dictionary<MechanitorControlGroup, Dictionary<Map, Area>>();
+        public static readonly Dictionary<MechanitorControlGroup, MoveableArea> shutdownAreasGravship = new Dictionary<MechanitorControlGroup, MoveableArea>();
 
         public static Dictionary<Map, Area> GetSmartShutdownAreas(this MechanitorControlGroup group)
         {
@@ -30,6 +32,15 @@ namespace SmartWorkMode
             return null;
         }
 
+        public static MoveableArea GetSmartShutdownAreaGravship(this MechanitorControlGroup group)
+        {
+            if (shutdownAreasGravship.ContainsKey(group))
+            {
+                return shutdownAreasGravship[group];
+            }
+            return null;
+        }
+
         public static void SetSmartShutdownAreas(this MechanitorControlGroup group, Dictionary<Map, Area> areas)
         {
             shutdownAreas[group] = areas;
@@ -42,6 +53,11 @@ namespace SmartWorkMode
                 shutdownAreas[group] = new Dictionary<Map, Area>();
             }
             shutdownAreas[group][map] = area;
+        }
+
+        public static void SetSmartShutdownAreaGravship(this MechanitorControlGroup group, MoveableArea area)
+        {
+            shutdownAreasGravship[group] = area;
         }
     }
 }

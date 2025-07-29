@@ -64,6 +64,8 @@
     <Compile Include="Debug.cs" />
     <Compile Include="JobGiver_SmartShutdown.cs" />
     <Compile Include="MechWorkModeDefOf.cs" />
+    <Compile Include="Patch_Gravship.cs" />
+    <Compile Include="Patch_MoveableArea_Allowed.cs" />
     <Compile Include="Patch_MechanitorControlGroup.cs" />
     <Compile Include="Patch_Pawn_MechanitorTracker.cs" />
     <Compile Include="PawnColumnWorker_SmartShutdownArea.cs" />
