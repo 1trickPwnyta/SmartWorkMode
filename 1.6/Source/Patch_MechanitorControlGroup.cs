@@ -23,7 +23,14 @@ namespace SmartWorkMode
             Dictionary<Map, Area> shutdownAreas = __instance.GetSmartShutdownAreas();
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                shutdownAreas.RemoveAll(p => p.Key == null || !Find.Maps.Contains(p.Key) || p.Value == null || !p.Key.areaManager.AllAreas.Contains(p.Value));
+                foreach (Map map in Find.Maps)
+                {
+                    if (!shutdownAreas.ContainsKey(map))
+                    {
+                        shutdownAreas[map] = null;
+                    }
+                }
+                shutdownAreas.RemoveAll(p => p.Key == null || !Find.Maps.Contains(p.Key) || (p.Value != null && !p.Key.areaManager.AllAreas.Contains(p.Value)));
             }
             Scribe_Collections.Look(ref shutdownAreas, "shutdownAreas", LookMode.Reference, LookMode.Reference);
             __instance.SetSmartShutdownAreas(shutdownAreas);

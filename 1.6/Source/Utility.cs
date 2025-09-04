@@ -59,5 +59,16 @@ namespace SmartWorkMode
         {
             shutdownAreasGravship[group] = area;
         }
+
+        public static void CopySmartShutdownAreaToMap(Area area, MoveableArea_Allowed areaGravship)
+        {
+            foreach (MechanitorControlGroup group in shutdownAreasGravship.Keys)
+            {
+                if (!group.GetSmartShutdownAreas().ContainsKey(area.Map) && group.GetSmartShutdownAreaGravship() == areaGravship)
+                {
+                    group.SetSmartShutdownArea(area.Map, area);
+                }
+            }
+        }
     }
 }

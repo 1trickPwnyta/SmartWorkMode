@@ -1,10 +1,8 @@
 ﻿using HarmonyLib;
-using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using Verse;
 
 namespace SmartWorkMode
 {
@@ -19,23 +17,9 @@ namespace SmartWorkMode
             {
                 new CodeInstruction(OpCodes.Ldloc_0),
                 new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, typeof(PatchUtility_MoveableArea_Allowed).Method(nameof(PatchUtility_MoveableArea_Allowed.CopySmartShutdownAreaToMap)))
+                new CodeInstruction(OpCodes.Call, typeof(Utility).Method(nameof(Utility.CopySmartShutdownAreaToMap)))
             });
             return instructionsList;
-        }
-    }
-
-    public static class PatchUtility_MoveableArea_Allowed
-    {
-        public static void CopySmartShutdownAreaToMap(Area area, MoveableArea_Allowed areaGravship)
-        {
-            foreach (MechanitorControlGroup group in Utility.shutdownAreasGravship.Keys)
-            {
-                if (group.GetSmartShutdownAreaGravship() == areaGravship)
-                {
-                    group.SetSmartShutdownArea(area.Map, area);
-                }
-            }
         }
     }
 }

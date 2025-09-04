@@ -3,7 +3,6 @@ using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 using Verse;
 
@@ -16,15 +15,28 @@ namespace SmartWorkMode
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> instructionsList = instructions.ToList();
-            int index = instructionsList.FindLastIndex(i => i.Calls(typeof(List<Pawn>).Method(nameof(List<Pawn>.AddRange))));
             object areaField = instructionsList.First(i => i.opcode == OpCodes.Stfld).operand;
-            instructionsList.InsertRange(index + 1, new[]
+
+            int firstIndex = instructionsList.FindIndex(i => i.Calls(typeof(List<Pawn>).Method(nameof(List<Pawn>.AddRange))));
+            instructionsList.InsertRange(firstIndex + 1, new[]
             {
                 new CodeInstruction(OpCodes.Ldloc_1),
                 new CodeInstruction(OpCodes.Ldfld, areaField),
-                new CodeInstruction(OpCodes.Ldloc_S, 7),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, typeof(Gravship).Field(nameof(Gravship.areas))),
+                new CodeInstruction(OpCodes.Ldfld, typeof(MoveableAreas).Field(nameof(MoveableAreas.homeArea))),
                 new CodeInstruction(OpCodes.Call, typeof(PatchUtility_Gravship).Method(nameof(PatchUtility_Gravship.CopySmartShutdownAreaToGravship)))
             });
+
+            int lastIndex = instructionsList.FindLastIndex(i => i.Calls(typeof(List<Pawn>).Method(nameof(List<Pawn>.AddRange))));
+            instructionsList.InsertRange(lastIndex + 1, new[]
+            {
+                new CodeInstruction(OpCodes.Ldloc_1),
+                new CodeInstruction(OpCodes.Ldfld, areaField),
+                new CodeInstruction(OpCodes.Ldloc_S, 8),
+                new CodeInstruction(OpCodes.Call, typeof(PatchUtility_Gravship).Method(nameof(PatchUtility_Gravship.CopySmartShutdownAreaToGravship)))
+            });
+            
             return instructionsList;
         }
     }
