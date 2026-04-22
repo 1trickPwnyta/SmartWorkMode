@@ -12,7 +12,7 @@ namespace SmartWorkMode
 
         public static Dictionary<Map, Area> GetSmartShutdownAreas(this MechanitorControlGroup group)
         {
-            if (shutdownAreas.ContainsKey(group))
+            if (shutdownAreas.ContainsKey(group) && shutdownAreas[group] != null)
             {
                 return shutdownAreas[group];
             }
@@ -22,7 +22,7 @@ namespace SmartWorkMode
 
         public static Area GetSmartShutdownArea(this MechanitorControlGroup group, Map map)
         {
-            if (shutdownAreas.ContainsKey(group))
+            if (shutdownAreas.ContainsKey(group) && shutdownAreas[group] != null)
             {
                 if (shutdownAreas[group] != null && shutdownAreas[group].ContainsKey(map))
                 {
@@ -34,7 +34,7 @@ namespace SmartWorkMode
 
         public static MoveableArea GetSmartShutdownAreaGravship(this MechanitorControlGroup group)
         {
-            if (shutdownAreasGravship.ContainsKey(group))
+            if (shutdownAreasGravship.ContainsKey(group) && shutdownAreasGravship[group] != null)
             {
                 return shutdownAreasGravship[group];
             }
